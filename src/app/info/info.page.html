@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-title>Information</ion-title>
+      <ion-button fill="clear" routerLink="/home">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <div *ngIf="info['Image Gallery']['src']">
+        <img alt="{{info['Image Gallery']['alt']}}" src="{{info['Image Gallery']['src']}}"/>
+      </div>
+      <div *ngIf="info['Image Gallery']?.length > 0">
+        <img alt="{{info['Image Gallery'][0]['alt']}}" src="{{info['Image Gallery'][0]['src']}}"/>
+      </div>
+      <div *ngIf="!info['Image Gallery']">
+        <img alt="No image available" src="../assets/img/noimage.jpg"/>
+      </div>
+    </ion-row>
+  </ion-grid>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label>Name:</ion-label>
+      {{info['Species Name']}} 
+    </ion-item>
+    <ion-item>
+      <ion-label>Username:</ion-label>
+      {{info['Scientific Name']}} 
+    </ion-item>
+    <ion-item>
+      <ion-label>Email Address:</ion-label>
+      <div [innerHTML]="info['Location']"></div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone Number:</ion-label>
+        <div [innerHTML]="info['Biology']"></div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Website URL:</ion-label>
+        <div [innerHTML]="info['Physical Description']"></div> 
+    </ion-item>
+  </ion-list>
+</ion-content>

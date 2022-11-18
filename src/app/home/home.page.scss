@@ -25,3 +25,51 @@
 #container a {
   text-decoration: none;
 }
+
+.box {
+  display: flex;
+  align-items: stretch;
+}
+
+#site-logo a {
+  text-indent: -9999px;
+  display: block;
+  position: static;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background: #fff url(../../assets/icon/fishwatch.svg) 0px -181px;
+  background-size: 191px 440px;
+}
+
+#site-logo a::after {
+  content: "";
+  position: absolute;
+  left: 100px;
+  width: 140px;
+  height: 75px;
+  background: url(../../assets/icon/fishwatch.svg) 0px -270px;
+  background-size: 192px 441px;
+}
+
+ion-row{
+  ion-card{
+    width:100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    img{
+      width:100%;
+    }
+  } 
+}
+
+ion-card {
+  width:100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+  
+ion-card > img {
+  width: 100%;
+  height: 100%;
+}

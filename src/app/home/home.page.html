@@ -1,20 +1,88 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+      <div id="site-logo">
+        <a href="/">NOAA FishWatch.gov</a>
+      </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!-- <ion-content [fullscreen]="true">
+  <ion-card *ngFor="let mon of api">
+    <img src="{{mon.img}}"/>
+    <ion-card-header>
+      <ion-card-title>{{mon.name}}</ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+    </ion-card-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+    <ion-card-content>
+      {{mon.level}}
+    </ion-card-content>
+  </ion-card>
+</ion-content> -->
+
+
+<ion-content [fullscreen]="true">
+
+  <!-- <ion-grid ion-no-padding>
+    <ion-row no-padding>
+      <ion-col size="4" *ngFor="let fish of res">
+        <div *ngIf="fish['Image Gallery']" class="box">
+          <img src="{{fish['Image Gallery']['src']}}"/>
+        </div>
+        <div *ngIf="fish['Image Gallery']?.length > 0" class="box">
+          <img src="{{fish['Image Gallery'][0]['src']}}"/>
+        </div>
+        <div *ngIf="!fish['Image Gallery']" class="box">
+          <img src="../assets/img/noimage.jpg"/>
+        </div>
+        <h4>{{fish['Species Name']}}</h4>
+        <p>{{fish['Scientific Name']}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+  <ion-grid ion-no-padding>
+    <ion-row no-padding>
+      <ion-col size="4" *ngFor="let fish of res; index as i" no-padding class="box">
+        <ion-card [routerLink]="['/','info',i]" [state]="fish" [queryParams]="fish">
+          <div *ngIf="fish['Image Gallery']; then hasImage else noImage"></div>
+          <ng-template #hasImage>
+            <div *ngIf="fish['Image Gallery']?.length > 0; then manyImage else oneImage"></div>
+            <ng-template #manyImage>
+              <img src="{{fish['Image Gallery'][0]['src']}}"/>
+            </ng-template>
+            <ng-template #oneImage>
+              <img src="{{fish['Image Gallery']['src']}}"/>
+            </ng-template>
+          </ng-template>
+          <ng-template #noImage>
+            <img src="../assets/img/noimage.jpg"/>
+          </ng-template>
+
+          <ion-card-header>
+            <ion-card-subtitle>{{fish['Species Name']}}</ion-card-subtitle>
+          </ion-card-header>
+<!-- 
+          <ion-card-content>
+            <div [innerHTML]="fish['Physical Description']"></div>
+          </ion-card-content> -->
+        <!-- </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+  <!-- <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let f of fish['Image Gallery']">
+          <ion-thumbnail slot="start">
+            <img alt="{{f.alt}}" src="{{f.src}}" />
+          </ion-thumbnail>
+          <ion-label>{{f.title}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card> -->
+
+
+
