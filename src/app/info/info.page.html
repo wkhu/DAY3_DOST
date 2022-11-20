@@ -10,19 +10,28 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <div *ngIf="info['Image Gallery']['src']">
-        <img alt="{{info['Image Gallery']['alt']}}" src="{{info['Image Gallery']['src']}}"/>
-      </div>
-      <div *ngIf="info['Image Gallery']?.length > 0">
-        <img alt="{{info['Image Gallery'][0]['alt']}}" src="{{info['Image Gallery'][0]['src']}}"/>
-      </div>
-      <div *ngIf="!info['Image Gallery']">
-        <img alt="No image available" src="../assets/img/noimage.jpg"/>
-      </div>
-    </ion-row>
-  </ion-grid>
+  <div *ngIf="info['Image Gallery']; then hasImage else noImage"></div>
+  <ng-template #hasImage>
+    <div *ngIf="info['Image Gallery']?.length > 0; then manyImage else oneImage"></div>
+    <ng-template #manyImage>
+      <img alt="{{info['Image Gallery'][0]['alt']}}" src="{{info['Image Gallery'][0]['src']}}"/>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" *ngFor="let pic of info['Image Gallery'].slice(1)">
+            <img alt="{{pic.alt}}" src="{{pic.src}}"/>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      
+    </ng-template>
+    <ng-template #oneImage>
+      <img src="{{info['Image Gallery']['src']}}"/>
+    </ng-template>
+  </ng-template>
+  <ng-template #noImage>
+    <img src="../assets/img/noimage.jpg"/>
+  </ng-template>
   <ion-list lines="none">
     <ion-item>
       <ion-label>Name:</ion-label>
